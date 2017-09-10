@@ -1,0 +1,34 @@
+@import '../../../variables.scss';
+
+.books-wrapper {
+  max-width: 750px;
+  margin: $xlg auto;
+
+  .sort-section.mat-card {
+    display: flex;
+    justify-content: space-between;
+    padding: $m;
+    margin-top: 2px;
+
+    .sort-section-header {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0 $xlg;
+
+      .sort-section-header-title {
+        margin-right: $m;
+      }
+    }
+
+    .sort-by {
+      position: relative;
+      top: 2px;
+      font-size: $xlg;
+    }
+  }
+}
+
+.spinner {
+  margin: 50px auto !important;
+}

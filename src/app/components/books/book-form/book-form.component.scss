@@ -1,0 +1,54 @@
+@import '../../../../variables.scss';
+
+.book-form-card {
+  margin: $xlg auto;
+  max-width: 750px;
+  overflow: hidden;
+
+  .card-image-wrapper {
+    margin-top: 35px;
+    position: relative;
+
+    .image-actions {
+      display: flex;
+      justify-content: space-around;
+      position: absolute;
+      top: 50%;
+      left: 150%;
+      width: 250px;
+      transform: translate(-50%, -50%);
+      transition: all 350ms;
+    }
+
+    .change-cover-label {
+      position: relative;
+      display: inline-block;
+      width: 140%;
+      left: -20%;
+      cursor: pointer;
+    }
+
+    &:hover {
+      .image-actions {
+        left: 50%;
+      }
+    }
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  .author-chips-label {
+    margin-right: $m;
+    line-height: 32px;
+  }
+
+  .author-chip {
+    margin-bottom: $m;
+  }
+
+  .card-actions {
+    padding: 8px $lg;
+  }
+}

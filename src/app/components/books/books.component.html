@@ -1,0 +1,32 @@
+<md-spinner *ngIf="state.fetching" class="spinner"></md-spinner>
+<h1 *ngIf="!state.fetching && state.error">
+  Oops.. We can't fetch your books. Please, try again later
+</h1>
+<div class="books-wrapper" *ngIf="!state.fetching && !state.error">
+  <md-card class="sort-section">
+    <h2 class="sort-section-header">
+      <span class="sort-section-header-title">Your bookshelf</span>
+      <button md-button (click)="addBookModal()">Add New Book</button>
+    </h2>
+    <md-card-title>
+      <span class="sort-by">Sort by</span>
+      <button md-icon-button [mdMenuTriggerFor]="sortMenu">
+        <md-icon>more_vert</md-icon>
+      </button>
+      <md-menu #sortMenu="mdMenu">
+        <button md-menu-item (click)="toggleSortBy('title')">
+          <span>Title</span>
+        </button>
+        <button md-menu-item (click)="toggleSortBy('year')">
+          <span>Year</span>
+        </button>
+      </md-menu>
+    </md-card-title>
+  </md-card>
+
+  <app-book
+    *ngFor="let book of books | sortArrayByField: sortBy"
+    [book]="book"
+    (onDelete)="deleteBook($event)"
+  ></app-book>
+</div>

@@ -1,0 +1,14 @@
+<md-card class="modal-card">
+  <md-card-header md-dialog-title>
+    <md-card-title>{{ data.title }}</md-card-title>
+  </md-card-header>
+
+  <md-card-content md-dialog-content>
+    <p>{{ data.content }}</p>
+  </md-card-content>
+
+  <md-card-actions md-dialog-actions class="modal-actions">
+    <button md-raised-button color="primary" (click)="onYesClick()">Yes</button>
+    <button md-raised-button color="warn" (click)="onNoClick()">No</button>
+  </md-card-actions>
+</md-card>

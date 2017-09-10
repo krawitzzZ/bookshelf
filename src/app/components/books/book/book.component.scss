@@ -1,0 +1,19 @@
+@import '../../../../variables.scss';
+
+.book-expansion-header {
+  line-height: 24px;
+  padding-left: $m;
+}
+
+.author-chips-label {
+  margin-right: $m;
+  line-height: 32px;
+}
+
+.author-chip {
+  margin-bottom: $m;
+}
+
+.card-actions {
+  padding: 8px $lg;
+}

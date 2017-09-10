@@ -1,0 +1,10 @@
+@import '../../../variables.scss';
+
+.modal-card {
+  text-align: center;
+
+  .modal-actions {
+    justify-content: space-around;
+    padding: $xxxlg 0 $m;
+  }
+}

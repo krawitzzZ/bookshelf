@@ -1,0 +1,38 @@
+<md-expansion-panel>
+  <md-expansion-panel-header>
+    <md-icon md-list-icon>book</md-icon>
+    <a class="book-expansion-header" dPreventClickEvent md-line>
+      {{ book.title }}, {{ book.year }} year
+    </a>
+  </md-expansion-panel-header>
+
+  <md-card>
+    <md-card-header>
+      <md-card-title>{{ book.title }}, published in {{ book.year }}</md-card-title>
+      <md-card-subtitle>Released {{ book.releaseDate | date: "MMMM dd, yyyy" }}</md-card-subtitle>
+    </md-card-header>
+
+    <img md-card-image src="{{ book.coverUrl ? book.coverUrl : noBookCover }}" alt="book.title">
+
+    <md-card-content>
+      <p>{{ book.pages }} pages</p>
+      <p>ISBN: {{ book.ISBN }}</p>
+      <md-chip-list>
+        <span class="author-chips-label">Authors:</span>
+        <md-chip
+          class="pointer author-chip"
+          removable="true"
+          *ngFor="let author of book.authors"
+        >
+          {{ author.name }} {{ author.surname }}
+        </md-chip>
+      </md-chip-list>
+      <p>Publisher: {{ book.publisher }}</p>
+    </md-card-content>
+
+    <md-card-actions class="card-actions">
+      <button md-raised-button color="primary" (click)="editBook(book)">Edit book</button>
+      <button md-raised-button color="warn" (click)="deleteBookConfirm(book)">Delete book</button>
+    </md-card-actions>
+  </md-card>
+</md-expansion-panel>

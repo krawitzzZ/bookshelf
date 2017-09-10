@@ -1,0 +1,16 @@
+<div class="book-detail">
+  <md-spinner *ngIf="state.fetching" class="spinner"></md-spinner>
+  <div *ngIf="!state.fetching && !book && state.error">
+    <md-card-header>
+      <md-card-title>
+        <h1>Oops.. We can't fetch your book. Please, try again later</h1>
+      </md-card-title>
+    </md-card-header>
+  </div>
+  <app-book-form
+    *ngIf="!state.fetching && book"
+    [book]="book"
+    (onSave)="saveBook($event)"
+    (onCancel)="goBack()"
+  ></app-book-form>
+</div>

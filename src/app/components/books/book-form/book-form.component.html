@@ -1,0 +1,126 @@
+<md-card class="book-form-card">
+  <form [formGroup]="bookForm">
+    <md-card-header>
+      <md-card-title>
+
+        <md-form-field>
+          <input mdInput formControlName="title" placeholder="Title">
+          <md-error *ngIf="hasError('title', 'required')">
+            Title is <strong>required</strong>
+          </md-error>
+          <md-error *ngIf="hasError('title', 'maxlength')">
+            Title should be less than 30 symbols
+          </md-error>
+        </md-form-field>
+
+        <md-form-field>
+          <input mdInput formControlName="year" placeholder="Publish year">
+          <md-error *ngIf="hasError('year', 'required')">
+            Publish year is <strong>required</strong>
+          </md-error>
+          <md-error *ngIf="hasError('year', 'maxValue') || hasError('year', 'minValue')">
+            Publish year should be beetwen {{ minPublishYear }} and {{ maxPublishYear }}
+          </md-error>
+        </md-form-field>
+
+        <md-form-field>
+          <input
+            mdInput [mdDatepicker]="releaseDatePicker"
+            formControlName="releaseDate"
+            [mdDatepickerFilter]="releaseDateFilter"
+            placeholder="Released"
+          >
+          <md-datepicker-toggle mdSuffix [for]="releaseDatePicker"></md-datepicker-toggle>
+          <md-datepicker #releaseDatePicker></md-datepicker>
+          <md-error *ngIf="hasError('releaseDate', 'required')">
+            Release date is <strong>required</strong>
+          </md-error>
+        </md-form-field>
+      </md-card-title>
+    </md-card-header>
+
+    <div class="card-image-wrapper">
+      <img
+        md-card-image
+        class="book-cover"
+        src="{{ book.coverUrl ? book.coverUrl : noBookCover }}"
+        alt="{{book.title}}'s cover"
+      >
+      <div class="image-actions">
+        <button md-raised-button color="primary">
+          <label for="book-cover-input" class="change-cover-label">Change cover</label>
+        </button>
+        <button *ngIf="book.coverUrl" md-raised-button color="warn" (click)="onDeleteBookCover()">
+          Delete cover
+        </button>
+      </div>
+      <input
+        type="file"
+        accept=".jpg,.png,.jpeg"
+        id="book-cover-input"
+        name="book-cover-input"
+        hidden="hidden"
+        (change)="onBookCoverChange($event)"
+      />
+    </div>
+
+    <md-card-content>
+      <p>
+        <md-form-field>
+          <input mdInput formControlName="pages" placeholder="Pages">
+          <md-error *ngIf="hasError('pages', 'maxValue') || hasError('pages', 'minValue') || hasError('pages', 'required')">
+            Book should have more than {{ minPages - 1 }} and less than {{ maxPages }} pages
+          </md-error>
+        </md-form-field>
+      </p>
+
+      <p>
+        <md-form-field>
+          <input mdInput formControlName="ISBN" placeholder="ISBN">
+          <md-error *ngIf="hasError('ISBN', 'required')">
+            ISBN is <strong>required</strong>
+          </md-error>
+          <md-error *ngIf="hasError('ISBN', 'isbn')">
+              Provide a valid ISBN number
+          </md-error>
+        </md-form-field>
+      </p>
+
+      <md-chip-list>
+        <span class="author-chips-label">Authors:</span>
+        <span *ngIf="hasError('authors', 'required')" class="author-chips-label mat-error">
+          Should be at least one author
+        </span>
+        <md-chip
+          class="pointer author-chip"
+          removable="true"
+          *ngFor="let author of bookForm.value.authors"
+          (remove)="onAuthorRemove(author)"
+          (click)="editAuthor(author)"
+        >
+          {{ author.name }} {{ author.surname }}
+          <md-icon mdChipRemove>cancel</md-icon>
+        </md-chip>
+        <md-chip (click)="addAuthor()" selected="true" class="pointer">
+          Add new author
+        </md-chip>
+      </md-chip-list>
+
+      <p>
+        <md-form-field>
+          <input mdInput formControlName="publisher" placeholder="Publisher">
+          <md-error *ngIf="hasError('publisher', 'maxlength')">
+            Publisher should be less than 30 symbols
+          </md-error>
+        </md-form-field>
+      </p>
+    </md-card-content>
+
+    <md-card-actions class="card-actions">
+      <button [disabled]="bookForm.invalid" type="button" md-raised-button color="primary" (click)="saveBook()">
+        Save
+      </button>
+      <button md-raised-button type="button" (click)="onCancelClick()">Cancel</button>
+    </md-card-actions>
+  </form>
+</md-card>
